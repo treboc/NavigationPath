@@ -1,26 +1,27 @@
+import Factory
 import SwiftUI
 
 struct MainView: View {
-  @EnvironmentObject private var coordinator: NavigationStore
+  @InjectedObject(\.navigationStore) private var navigationStore
 
   var body: some View {
-    NavigationStack(path: $coordinator.path) {
+    NavigationStack(path: $navigationStore.path) {
       VStack {
         Button("Details") {
-          coordinator.push(.personDetails(.example))
+          navigationStore.push(.personDetails(.example))
         }
         Button("Sheet") {
-          coordinator.present(.settings)
+          navigationStore.present(.settings)
         }
         Button("Fullscreen Cover") {
-          coordinator.present(.addPerson)
+          navigationStore.present(.addPerson)
         }
       }
       .buttonStyle(.borderedProminent)
       .navigationTitle("Root View")
       .navigationDestination(for: Route.self, destination: { $0 })
-      .sheet(item: $coordinator.sheet, content: { $0 })
-      .fullScreenCover(item: $coordinator.fullscreenCover, content: { $0 })
+      .sheet(item: $navigationStore.sheet, content: { $0 })
+      .fullScreenCover(item: $navigationStore.fullscreenCover, content: { $0 })
     }
   }
 }

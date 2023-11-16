@@ -16,6 +16,8 @@
 		45A97B492B05578400B43979 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B482B05578400B43979 /* MainView.swift */; };
 		45A97B4B2B05578E00B43979 /* PersonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B4A2B05578E00B43979 /* PersonDetailsView.swift */; };
 		45A97B4D2B05579A00B43979 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B4C2B05579A00B43979 /* SettingsView.swift */; };
+		45F689DC2B06CAFE00395EC1 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 45F689DB2B06CAFE00395EC1 /* Factory */; };
+		45F689DE2B06CB0C00395EC1 /* NavigationPath+FactoryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F689DD2B06CB0C00395EC1 /* NavigationPath+FactoryContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,7 @@
 		45A97B482B05578400B43979 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		45A97B4A2B05578E00B43979 /* PersonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsView.swift; sourceTree = "<group>"; };
 		45A97B4C2B05579A00B43979 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		45F689DD2B06CB0C00395EC1 /* NavigationPath+FactoryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationPath+FactoryContainer.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F689DC2B06CAFE00395EC1 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +67,7 @@
 			children = (
 				45A97B3E2B05572C00B43979 /* NavigationPath.swift */,
 				45A97B402B05574D00B43979 /* NavigationPath+AppCoordinator.swift */,
+				45F689DD2B06CB0C00395EC1 /* NavigationPath+FactoryContainer.swift */,
 				45A97B452B05576C00B43979 /* Views */,
 				45A97B422B05575900B43979 /* Models */,
 				45A97B342B0556F100B43979 /* Assets.xcassets */,
@@ -114,6 +119,9 @@
 			dependencies = (
 			);
 			name = NavigationPath;
+			packageProductDependencies = (
+				45F689DB2B06CAFE00395EC1 /* Factory */,
+			);
 			productName = NavigationPath;
 			productReference = 45A97B2D2B0556EF00B43979 /* NavigationPath.app */;
 			productType = "com.apple.product-type.application";
@@ -143,6 +151,9 @@
 				Base,
 			);
 			mainGroup = 45A97B242B0556EF00B43979;
+			packageReferences = (
+				45F689DA2B06CAFE00395EC1 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = 45A97B2E2B0556EF00B43979 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -172,6 +183,7 @@
 				45A97B4D2B05579A00B43979 /* SettingsView.swift in Sources */,
 				45A97B4B2B05578E00B43979 /* PersonDetailsView.swift in Sources */,
 				45A97B442B05576300B43979 /* Person.swift in Sources */,
+				45F689DE2B06CB0C00395EC1 /* NavigationPath+FactoryContainer.swift in Sources */,
 				45A97B472B05577800B43979 /* AddPersonView.swift in Sources */,
 				45A97B3F2B05572C00B43979 /* NavigationPath.swift in Sources */,
 				45A97B492B05578400B43979 /* MainView.swift in Sources */,
@@ -384,6 +396,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		45F689DA2B06CAFE00395EC1 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = exactVersion;
+				version = 2.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		45F689DB2B06CAFE00395EC1 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45F689DA2B06CAFE00395EC1 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 45A97B252B0556EF00B43979 /* Project object */;
 }

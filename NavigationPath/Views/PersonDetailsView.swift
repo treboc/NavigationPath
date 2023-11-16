@@ -2,10 +2,11 @@
 //
 //
 
+import Factory
 import SwiftUI
 
 struct PersonDetailsView: View {
-  @EnvironmentObject private var coordinator: NavigationStore
+  @InjectedObject(\.navigationStore) private var navigationStore
 
   let person: Person
 
@@ -16,13 +17,13 @@ struct PersonDetailsView: View {
 
       VStack {
         Button("Pop") {
-          coordinator.pop()
+          navigationStore.pop()
         }
 
-        Button("Pop to root") { coordinator.popToRoot() }
+        Button("Pop to root") { navigationStore.popToRoot() }
 
         Button("More Details") {
-          coordinator.push(.personDetails(.example))
+          navigationStore.push(.personDetails(.example))
         }
       }
       .buttonStyle(.borderedProminent)

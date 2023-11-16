@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-@MainActor final class NavigationStore: ObservableObject {
+final class NavigationStore: ObservableObject {
   @Published var path = NavigationPath()
   @Published var sheet: SheetItem?
   @Published var fullscreenCover: FullscreenCoverItem?
@@ -31,16 +31,16 @@ extension Route {
 
 // MARK: - Navigation
 extension NavigationStore {
-  func push(_ route: Route) {
+  @MainActor func push(_ route: Route) {
     path.append(route)
   }
 
-  func pop() {
+  @MainActor func pop() {
     guard path.count > 0 else { return }
     path.removeLast()
   }
 
-  func popToRoot() {
+  @MainActor func popToRoot() {
     path.removeLast(path.count)
   }
 }
@@ -58,11 +58,11 @@ extension NavigationStore {
     }
   }
 
-  func present(_ sheetItem: SheetItem) {
+  @MainActor func present(_ sheetItem: SheetItem) {
     self.sheet = sheetItem
   }
 
-  func dismissSheet() {
+  @MainActor func dismissSheet() {
     self.sheet = nil
   }
 }
@@ -80,11 +80,11 @@ extension NavigationStore {
     }
   }
 
-  func present(_ fullscreenCoverItem: FullscreenCoverItem) {
+  @MainActor func present(_ fullscreenCoverItem: FullscreenCoverItem) {
     self.fullscreenCover = fullscreenCoverItem
   }
 
-  func dismissFullscreenCover() {
+  @MainActor func dismissFullscreenCover() {
     self.fullscreenCover = nil
   }
 }
