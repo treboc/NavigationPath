@@ -18,15 +18,9 @@ struct MainView: View {
       }
       .buttonStyle(.borderedProminent)
       .navigationTitle("Root View")
-      .navigationDestination(for: AppCoordinator.Route.self) { route in
-        coordinator.view(for: route)
-      }
-      .sheet(item: $coordinator.sheet) { item in
-        coordinator.view(for: item)
-      }
-      .fullScreenCover(item: $coordinator.fullscreenCover) { item in
-        coordinator.view(for: item)
-      }
+      .navigationDestination(for: AppCoordinator.Route.self, destination: { $0 })
+      .sheet(item: $coordinator.sheet, content: { $0 })
+      .fullScreenCover(item: $coordinator.fullscreenCover, content: { $0 })
     }
   }
 }

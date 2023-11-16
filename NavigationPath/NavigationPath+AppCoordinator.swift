@@ -8,28 +8,9 @@ final class AppCoordinator: ObservableObject {
   @Published var path = NavigationPath()
   @Published var sheet: SheetItem?
   @Published var fullscreenCover: FullscreenCoverItem?
-
-  @ViewBuilder func view(for destination: some Destination) -> some View {
-    if let route = destination as? Route {
-      switch route {
-        case .details(let person):
-          PersonDetailsView(person: person)
-      }
-    } else if let item = destination as? SheetItem {
-      switch item {
-        case .settings:
-          SettingsView()
-      }
-    } else if let item = destination as? FullscreenCoverItem {
-      switch item {
-        case .addPerson:
-          AddPersonView()
-      }
-    }
-  }
 }
 
-protocol Destination: Hashable, Identifiable {}
+protocol Destination: Hashable, Identifiable, View {}
 
 extension Destination {
   var id: String { String(describing: self) }
@@ -37,8 +18,15 @@ extension Destination {
 
 // MARK: - Navigation
 extension AppCoordinator {
-  enum Route: Destination {
+  enum Route: Destination, View {
     case details(person: Person)
+
+    @ViewBuilder var body: some View {
+      switch self {
+        case .details(let person):
+          PersonDetailsView(person: person)
+      }
+    }
   }
 
   func push(_ route: Route) {
@@ -59,6 +47,13 @@ extension AppCoordinator {
 extension AppCoordinator {
   enum SheetItem: Destination {
     case settings
+
+    @ViewBuilder var body: some View {
+      switch self {
+        case .settings:
+          SettingsView()
+      }
+    }
   }
 
   func present(_ sheetItem: SheetItem) {
@@ -74,6 +69,13 @@ extension AppCoordinator {
 extension AppCoordinator {
   enum FullscreenCoverItem: Destination {
     case addPerson
+
+    @ViewBuilder var body: some View {
+      switch self {
+        case .addPerson:
+          AddPersonView()
+      }
+    }
   }
 
   func present(_ fullscreenCoverItem: FullscreenCoverItem) {
