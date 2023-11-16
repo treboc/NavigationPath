@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-final class AppCoordinator: ObservableObject {
+@MainActor final class NavigationStore: ObservableObject {
   @Published var path = NavigationPath()
   @Published var sheet: SheetItem?
   @Published var fullscreenCover: FullscreenCoverItem?
@@ -16,19 +16,21 @@ extension Destination {
   var id: String { String(describing: self) }
 }
 
-// MARK: - Navigation
-extension AppCoordinator {
-  enum Route: Destination, View {
-    case details(person: Person)
+enum Route: Destination {
+  case personDetails(Person)
+}
 
-    @ViewBuilder var body: some View {
-      switch self {
-        case .details(let person):
-          PersonDetailsView(person: person)
-      }
+extension Route {
+  @ViewBuilder var body: some View {
+    switch self {
+      case let .personDetails(person):
+        PersonDetailsView(person: person)
     }
   }
+}
 
+// MARK: - Navigation
+extension NavigationStore {
   func push(_ route: Route) {
     path.append(route)
   }
@@ -44,7 +46,7 @@ extension AppCoordinator {
 }
 
 // MARK: - SheetPresentation
-extension AppCoordinator {
+extension NavigationStore {
   enum SheetItem: Destination {
     case settings
 
@@ -66,7 +68,7 @@ extension AppCoordinator {
 }
 
 // MARK: - SheetPresentation
-extension AppCoordinator {
+extension NavigationStore {
   enum FullscreenCoverItem: Destination {
     case addPerson
 

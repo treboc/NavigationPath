@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct PersonDetailsView: View {
-  @EnvironmentObject private var coordinator: AppCoordinator
+  @EnvironmentObject private var coordinator: NavigationStore
 
   let person: Person
 
@@ -19,10 +19,10 @@ struct PersonDetailsView: View {
           coordinator.pop()
         }
 
-        Button("Pop to root", action: coordinator.popToRoot)
+        Button("Pop to root") { coordinator.popToRoot() }
 
         Button("More Details") {
-          coordinator.push(.details(person: .example))
+          coordinator.push(.personDetails(.example))
         }
       }
       .buttonStyle(.borderedProminent)

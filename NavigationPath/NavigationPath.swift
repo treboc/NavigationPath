@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct MyApp: App {
-  @StateObject private var coordinator = AppCoordinator()
+  @StateObject private var coordinator = NavigationStore()
 
   var body: some Scene {
     WindowGroup {
