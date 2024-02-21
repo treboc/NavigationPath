@@ -21,41 +21,38 @@ struct MainView: View {
             .navigationTitle("Root View")
             .navigationDestination(for: Route.self, destination: { $0 })
         }
-        //    .background {
-        //        ZStack {
-        //            Color.clear
-        //                .sheet(item: $navigationStore.sheets, content: { $0 })
-        //            Color.clear
-        //                .sheet(item: $navigationStore.sheet2, content: { $0 })
-        //        }
-        //    }
-        //    .sheet(item: $navigationStore.sheet) { $0 }
         .fullScreenCover(item: $navigationStore.fullscreenCover, content: { $0 })
-        .modifier(Sheetable(sheets: $navigationStore.sheets, index: 0))
+        .sheets(items: $navigationStore.sheets, index: 0)
     }
 }
 
 
 struct Sheetable: ViewModifier {
-    @Binding var sheets: [NavigationStore.SheetItem]
+    @Binding var items: [NavigationStore.SheetItem]
     let index: Int?
 
     @ViewBuilder func body(content: Content) -> some View {
-        if !sheets.isEmpty, let item = sheets[safeIndex: index ?? 0] {
+        if !items.isEmpty, let item = items[safeIndex: index ?? 0] {
             content
                 .sheet(item: Binding<NavigationStore.SheetItem?>(get: {
                     return item
                 }, set: { item in
                     if let item = item {
-                        sheets.insert(item, at: 0)
+                        items.insert(item, at: 0)
                     }
                 })) { item in
                     item.body
-                        .modifier(Sheetable(sheets: $sheets, index: (index ?? 0) + 1 ))
+                        .modifier(Sheetable(items: $items, index: (index ?? 0) + 1 ))
                 }
         } else {
             content
         }
+    }
+}
+
+extension View {
+    func sheets(items: Binding<[NavigationStore.SheetItem]>, index: Int?) -> some View {
+        modifier(Sheetable(items: items, index: index))
     }
 }
 
